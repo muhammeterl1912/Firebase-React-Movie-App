@@ -2,9 +2,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
-  //? kendi theme ayarlarımızı eklemek için bu kısmı ekliyoruz
+  // Kendi tema ayarlarınızı eklemek için bu kısmı kullanın.
   theme: {
-    //! eğer tailwind'in default theme ayarları yerine kendimizinkini eklemek istemiyorsak mutlaka extend objesi içinde eklememiz gerekli yoksa tüm theme objesi değişir ve kendi eklediklerimiz dışındakileri kullanamayız.
+    // Eğer tailwind'in varsayılan tema ayarları yerine kendi ayarlarınızı eklemek istemiyorsanız, mutlaka "extend" nesnesi içinde eklemeniz gerekir. Aksi takdirde, tüm tema nesnesi değiştirilir ve kendi eklediklerinizin dışındakileri kullanamazsınız.
     extend: {
       colors: {
         "gray-dark-main": "#23242a",
@@ -17,4 +17,5 @@ module.exports = {
       },
     },
   },
+  darkMode: "selector",
 };
