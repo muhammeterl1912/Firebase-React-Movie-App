@@ -1,6 +1,7 @@
 import GoogleIcon from "../assets/icons/GoogleIcon";
 import { useState } from "react";
 import { useContextAuth } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
@@ -11,6 +12,7 @@ const Register = () => {
   });
 
   const { createUser } = useContextAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUserInfo((info) => ({
@@ -21,7 +23,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createUser(userInfo.email, userInfo.password);
-    console.log(userInfo);
+    navigate("/login");
   };
   return (
     <div className="flex justify-center">
