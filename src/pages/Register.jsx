@@ -22,7 +22,8 @@ const Register = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(userInfo.email, userInfo.password);
+    const displayName = `${userInfo.firstName} ${userInfo.lastName}`
+    createUser(userInfo.email, userInfo.password,displayName);
     navigate("/login");
   };
   return (

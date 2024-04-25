@@ -1,22 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../auth/firebase";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toastSuccessNotify,toastErrorNotify } from "../helper/ToastNotify";
+import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
 
-  const createUser = async (email, password) => {
+  const createUser = async (email, password, displayName) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, { displayName });
       toastSuccessNotify("Registered Sucessfully");
+      navigate("/main");
     } catch (error) {
       toastErrorNotify(error.message);
     }
@@ -25,22 +29,44 @@ const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+
+      navigate("/main");
       toastSuccessNotify("Logged-In Sucessfully");
     } catch (error) {
       toastErrorNotify(error.message);
     }
   };
-  const logOut = ()=>{
-    signOut(auth).then(()=>{
-      toastSuccessNotify("Logged out successfully.Hope to see you soon.")
-    })
-  }
+  const logOut = () => {
+    signOut(auth).then(() => {
+      navigate("/login");
+      toastSuccessNotify("Logged out successfully.Hope to see you soon.");
+    });
+  };
+  const userTracker = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { email, displayName, photoURL } = user;
+        setCurrentUser({ email, displayName, photoURL });
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+      } else {
+        setCurrentUser(false);
+        // User is signed out
+        // ...
+      }
+    });
+  };
+  useEffect(() => {
+    // I need to call this method once compenent did mount.
+    userTracker();
+  }, []);
   const values = {
     currentUser,
     createUser,
     signIn,
-    signOut
+    logOut,
   };
 
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
