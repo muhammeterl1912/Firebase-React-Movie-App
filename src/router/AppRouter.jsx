@@ -1,21 +1,20 @@
-import { Routes,Route } from "react-router-dom";
-import Main from "../pages/Main"
-import Login from "../pages/Login"
+import { Routes, Route } from "react-router-dom";
+import Main from "../pages/Main";
+import Login from "../pages/Login";
 import Register from "../pages/Register";
-import MovieDetail from "../pages/MovieDetail"
-import Navbar from "../components/Navbar";
-
+import MovieDetail from "../pages/MovieDetail";
 
 const AppRouter = () => {
-  return <>
-  {/* <Navbar/> */}
-    <Routes>
-      <Route path="/" element={<Main/>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register/>} />
-      <Route path="/detail:id" element={<MovieDetail/>} />
-    </Routes>
-  </>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/detail/:id" element={<MovieDetail />} />
+      </Routes>
+    </>
+  );
 };
 
 export default AppRouter;
