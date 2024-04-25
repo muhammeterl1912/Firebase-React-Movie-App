@@ -1,11 +1,14 @@
 import React from "react";
-import Register from "./pages/Register";
 import AppRouter from "./router/AppRouter";
+import AuthProvider from "./context/AuthProvider";
 
 const App = () => {
   return (
-    <div>
-   <AppRouter/>
+    <div className="dark:bg-gray-dark-main min-h-screen">
+      <AuthProvider>
+        {" "}
+        <AppRouter />
+      </AuthProvider>
     </div>
   );
 };
