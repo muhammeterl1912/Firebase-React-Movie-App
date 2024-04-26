@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
-      navigate("/main");
+      navigate("/");
       toastSuccessNotify("Logged-In Sucessfully");
     } catch (error) {
       toastErrorNotify(error.message);
@@ -64,34 +64,33 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     // I need to call this method once compenent did mount.
     userTracker();
-  }, [])
-  
+  }, []);
+
   // Google Authentication
-  const googleAuth = () =>{
-    const provider = new GoogleAuthProvider()
+  const googleAuth = () => {
+    const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-    navigate("/main")
-    toastSuccessNotify("Registered succesfully with Google.");
-      }).catch((error) => {
+        navigate("/main");
+        toastSuccessNotify("Registered succesfully with Google.");
+      })
+      .catch((error) => {
         toastErrorNotify(error.message);
       });
-    
-    
-    }
-    // Send a password reset email
+  };
+  // Send a password reset email
 
-const forgotPassword =(email)=>{
-sendPasswordResetEmail(auth,email)
-  .then(() => {
-    toastSuccessNotify("Please check your mail inbox");
-    // Password reset email sent!
-    // ..
-  })
-  .catch((error) => {
-    toastErrorNotify(error.message);
-  });
-}
+  const forgotPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toastSuccessNotify("Please check your mail inbox");
+        // Password reset email sent!
+        // ..
+      })
+      .catch((error) => {
+        toastErrorNotify(error.message);
+      });
+  };
 
   const values = {
     currentUser,
