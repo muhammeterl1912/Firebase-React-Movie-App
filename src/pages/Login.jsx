@@ -9,7 +9,7 @@ const Login = () => {
     password: "",
   });
 
-  const { signIn } = useContextAuth();
+  const { signIn ,googleAuth,forgotPassword} = useContextAuth();
 
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -52,8 +52,13 @@ const Login = () => {
               <label htmlFor="floating_password">Password</label>
             </div>
             <div className="flex justify-between">
-              <span className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]">
-                Forgot Password
+              <span className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]"
+              onClick={()=>   {
+                forgotPassword(info?.email)
+                
+              }}
+              >
+                Forgot Password ?
               </span>
               <Link
                 className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]"
@@ -68,6 +73,7 @@ const Login = () => {
             <button
               className="flex justify-between text-center items-center btn-danger"
               type="button"
+              onClick={()=>googleAuth()}
             >
               Continue with Google
               <GoogleIcon color="currentColor" />

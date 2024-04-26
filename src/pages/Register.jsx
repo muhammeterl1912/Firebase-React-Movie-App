@@ -11,7 +11,7 @@ const Register = () => {
     password: "",
   });
 
-  const { createUser } = useContextAuth();
+  const { createUser,googleAuth  } = useContextAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -84,6 +84,7 @@ const Register = () => {
             <button
               className="flex justify-between text-center items-center btn-danger"
               type="button"
+              onClick={()=>googleAuth()}
             >
               Continue with Google
               <GoogleIcon color="currentColor" />
