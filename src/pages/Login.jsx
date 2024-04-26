@@ -54,8 +54,8 @@ const Login = () => {
             <div className="flex justify-between">
               <span className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]"
               onClick={()=>   {
-                forgotPassword(info?.email)
-                
+                forgotPassword(email)
+
               }}
               >
                 Forgot Password ?
