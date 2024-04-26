@@ -1,12 +1,13 @@
 import { useMovieData } from "../context/MovieProvider";
 import LoadingText from "../components/Loading";
 import MovieCard from "../components/MovieCard";
-
+import SearchInput from "../components/SearchInput"
 const Main = () => {
   const { movies, loading } = useMovieData();
 
   return (
     <div>
+    <SearchInput/>
       <div className="flex justify-center flex-wrap">
         {loading ? (
           <LoadingText />
