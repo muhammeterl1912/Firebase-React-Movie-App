@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../auth/firebase";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  signInWithPopup,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
@@ -13,14 +15,14 @@ import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
 
   const createUser = async (email, password, displayName) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName });
       toastSuccessNotify("Registered Sucessfully");
-      navigate("/main");
+      navigate("/login");
     } catch (error) {
       toastErrorNotify(error.message);
     }
@@ -61,12 +63,27 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     // I need to call this method once compenent did mount.
     userTracker();
-  }, []);
+  }, [])
+  
+  // Google Authentication
+  const googleAuth = () =>{
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(auth, provider)
+      .then((result) => {
+    navigate("/main")
+    toastSuccessNotify("Registered succesfully with Google.");
+      }).catch((error) => {
+        toastErrorNotify(error.message);
+      });
+    
+    
+    }
   const values = {
     currentUser,
     createUser,
     signIn,
     logOut,
+    googleAuth,
   };
 
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
