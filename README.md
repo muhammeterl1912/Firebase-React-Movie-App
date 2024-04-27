@@ -16,6 +16,9 @@ Limited Access: Users who are not logged in have restricted access to the app, e
 
 🎥 Context API: Context API is utilized to manage the application state efficiently, providing seamless data flow throughout the app.
 
+🎥  React Toastify: Toast notifications are used to provide users with feedback or alerts, enhancing the user experience with non-intrusive messages.
+
+
 
 ## Demo
 
