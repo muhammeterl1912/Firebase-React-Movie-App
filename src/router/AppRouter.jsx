@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import MovieDetail from "../pages/MovieDetail";
 import Navbar from "../components/Navbar";
 import PrivateRouter from "./PrivateRouter";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
           <Route path="" element={<MovieDetail />} />
         </Route>
       </Routes>
+      <Footer/>
     </>
   );
 };

@@ -1,11 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {toastErrorNotify } from "../helper/ToastNotify"
-// import VideoSection from "../components/VideoSection";
-{
-  /* <VideoSection videoKey={videoKey} /> */
-}
+import VideoSection from "../components/VideoSection";
+import {toastErrorNotify} from "../helper/ToastNotify"
 const MovieDetail = () => {
   const { id } = useParams();
   const [movieDetail, setMovieDetail] = useState({});
@@ -31,7 +28,7 @@ const MovieDetail = () => {
     axios
       .get(movieDetailBaseUrl)
       .then((res) => setMovieDetail(res.data))
-      .catch((err) => toastErrorNotify(err.message));
+      .catch((err) => toastErrorNotify(err));
     axios
       .get(videoUrl)
       .then((res) => setVideoKey(res.data.results[0].key))
@@ -41,7 +38,7 @@ const MovieDetail = () => {
   return (
     <div className="md:container px-10 mx-auto py-5">
       <h1 className="text-center text-white text-3xl">{title}</h1>
-      {videoKey && ""}
+      {videoKey && <VideoSection videoKey={videoKey} />}
       <div className="md:container flex justify-center px-10">
         <div className="flex flex-col lg:flex-row max-w-6xl rounded-lg bg-gray-100 dark:bg-gray-dark-second shadow-lg">
           <img

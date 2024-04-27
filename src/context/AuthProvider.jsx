@@ -40,8 +40,8 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     signOut(auth).then(() => {
-      navigate("/login");
-      toastSuccessNotify("Logged out successfully.Hope to see you soon.");
+      navigate("/");
+      toastSuccessNotify("Signed-out successfully.Hope to see you soon.");
     });
   };
   const userTracker = () => {
