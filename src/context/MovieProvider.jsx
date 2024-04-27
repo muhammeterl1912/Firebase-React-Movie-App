@@ -24,7 +24,11 @@ try {
     fetchData(FEATURED_API);
   }, []);
 
-const values ={movies,loading,fetchData}
+  const refresh =()=>  {
+    fetchData(FEATURED_API)
+    
+  }
+const values ={movies,loading,fetchData,refresh}
   return (
     <movieContext.Provider value={values}>{children}</movieContext.Provider>
   );

@@ -2,6 +2,7 @@ import { useMovieData } from "../context/MovieProvider";
 import LoadingText from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import SearchInput from "../components/SearchInput"
+import NotFound from "./NotFound";
 const Main = () => {
   const { movies, loading } = useMovieData();
 
@@ -17,6 +18,7 @@ const Main = () => {
           })
         )}
       </div>
+      {!movies.length&& (<NotFound/>)}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import MovieDetail from "../pages/MovieDetail";
 import Navbar from "../components/Navbar";
 import PrivateRouter from "./PrivateRouter";
 import Footer from "../components/Footer";
-
+import NotFound from "../pages/NotFound";
 const AppRouter = () => {
   return (
     <>
@@ -18,8 +18,10 @@ const AppRouter = () => {
         <Route path="/details/:id" element={<PrivateRouter />}>
           <Route path="" element={<MovieDetail />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer/>
+      
     </>
   );
 };
