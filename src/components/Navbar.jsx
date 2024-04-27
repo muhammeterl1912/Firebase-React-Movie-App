@@ -20,7 +20,7 @@ export default function Navbar() {
       >
         <div className="mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between">
-            <Link className="pr-2 text-2xl font-semibold" to="/">
+            <Link className="pr-2 sm:text-sm  lg:text-2xl font-semibold" to="/">
               Firebase Movie App
             </Link>
 
