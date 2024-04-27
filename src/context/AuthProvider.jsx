@@ -16,7 +16,7 @@ import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem("CurrentUser")) ||false);
 
   const createUser = async (email, password, displayName) => {
     try {
@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
       navigate("/");
       toastSuccessNotify("Logged-In Sucessfully");
     } catch (error) {
@@ -50,12 +49,14 @@ const AuthProvider = ({ children }) => {
       if (user) {
         const { email, displayName, photoURL } = user;
         setCurrentUser({ email, displayName, photoURL });
+        sessionStorage.setItem("CurrentUser",JSON.stringify({ email, displayName, photoURL }))
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
+      
         // ...
       } else {
         setCurrentUser(false);
+        sessionStorage.removeItem("CurrentUser")
         // User is signed out
         // ...
       }
@@ -71,7 +72,7 @@ const AuthProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        navigate("/main");
+        navigate("/");
         toastSuccessNotify("Registered succesfully with Google.");
       })
       .catch((error) => {
