@@ -18,7 +18,7 @@ const Main = () => {
           })
         )}
       </div>
-      {!movies.length&& (<NotFound/>)}
+      {!loading && !movies.length&& (<NotFound/>)}
     </div>
   );
 };
