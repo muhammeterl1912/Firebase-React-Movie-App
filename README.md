@@ -6,7 +6,7 @@ Welcome to the Firebase Movie App! This project is one of the best projects I ha
 
 ## Features
 
-🎥 Firebase Authentication: Users can sign up with mail and Google, log in, and securely authenticate to access the full features of the app.
+🎥 Firebase Authentication: Users can sign up with their Email or Google, reset their password, and log in securely to access the full features of the app.
 
 🎥 Movie Search: Users can search for movies using the provided search bar, enabling them to find information about their favorite films.
 
