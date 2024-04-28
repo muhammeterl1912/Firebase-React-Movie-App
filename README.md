@@ -6,11 +6,13 @@ Welcome to the Firebase Movie App! This project is one of the best projects I ha
 
 ## Features
 
-🎥 Firebase Authentication: Users can sign up, log in, and securely authenticate to access the full features of the app.
-Movie Search: Users can search for movies using the provided search bar, enabling them to find information about their favorite films.
+🎥 Firebase Authentication: Users can sign up with mail and Google, log in, and securely authenticate to access the full features of the app.
+
+🎥 Movie Search: Users can search for movies using the provided search bar, enabling them to find information about their favorite films.
 
 🎥 Detailed Movie Info: Upon selecting a movie from the search results, users can view comprehensive details about the selected movie, including synopsis, release date, ratings, and more.
-Limited Access: Users who are not logged in have restricted access to the app, encouraging them to sign up or log in to unlock the full potential of the platform.
+
+🎥 Limited Access: Users who are not logged in have restricted access to the app, encouraging them to sign up or log in to unlock the full potential of the platform.
 
 🎥 Responsive Design: The app is designed to be responsive across various devices, ensuring a consistent and optimal viewing experience for users on desktops, tablets, and smartphones.
 
