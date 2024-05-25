@@ -26,6 +26,8 @@ Welcome to the Firebase Movie App! This project is one of the best projects I ha
 
 Check out the live demo of the Firebase Movie App: 👉 [Please Click here to see Firebase Movie App Demo](https://merol-firebase-react-movie.netlify.app/)
 
+![chrome-capture-2024-5-17](https://github.com/muhammeterl1912/Firebase-React-Movie-App/assets/118777871/ca669c40-7abb-4926-a53f-775308af99a3)
+
 
 ## Tech Stack
 
