@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GoogleIcon from "../assets/icons/GoogleIcon";
 import { useContextAuth } from "../context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [info, setInfo] = useState({
@@ -9,23 +9,30 @@ const Login = () => {
     password: "",
   });
 
-  const { signIn, googleAuth, forgotPassword } = useContextAuth();
+  const { signIn, googleAuth, forgotPassword, currentUser } = useContextAuth();
+  const navigate = useNavigate(); 
 
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
 
   const { email, password } = info;
-  const handlesubmit = (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     signIn(email, password);
   };
 
+  if (currentUser) {
+    navigate("/");
+    return null; 
+  }
+
   return (
     <div className="flex justify-center">
       <div className="overflow-hidden flex-1 h-screen justify-center items-center dark:bg-gray-dark-main">
-        <div className={`form-container mt-[5vh] w-[380px] h-[500px] `}>
-          <form onSubmit={handlesubmit}>
-            <h2 className="text-red-main text-2xl font-[500] text-center tracking-[0.1em] mb-3">
+        <div className="form-container mt-[5vh] w-[380px] h-[500px]">
+          <form onSubmit={handleSubmit}>
+            <h2 className="text-red-main text-2xl font-medium text-center tracking-wider mb-3">
               Sign In
             </h2>
 
@@ -37,9 +44,11 @@ const Login = () => {
                 placeholder=" "
                 required
                 onChange={handleChange}
+                value={email} 
               />
-              <label htmlFor="floating_email">Email</label>
+              <label htmlFor="email">Email</label>
             </div>
+
             <div className="relative z-0 w-full mb-6 group">
               <input
                 name="password"
@@ -48,35 +57,37 @@ const Login = () => {
                 placeholder=" "
                 required
                 onChange={handleChange}
+                value={password} 
               />
-              <label htmlFor="floating_password">Password</label>
+              <label htmlFor="password">Password</label>
             </div>
+
             <div className="flex justify-between">
               <span
-                className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]"
-                onClick={() => {
-                  forgotPassword(email);
-                }}
+                className="py-3 text-sm cursor-pointer text-gray-500 hover:text-[#ff4b45]"
+                onClick={() => forgotPassword(email)}
               >
-                Forgot Password ?
+                Forgot Password?
               </span>
               <Link
-                className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]"
+                className="py-3 text-sm cursor-pointer text-gray-500 hover:text-[#ff4b45]"
                 to="/register"
               >
                 Sign Up
               </Link>
             </div>
-            <button className="btn-danger" type="submit">
+
+            <button className="btn-danger w-full mt-4" type="submit">
               Login
             </button>
+
             <button
-              className="flex justify-between text-center items-center btn-danger"
+              className="flex justify-center items-center btn-danger w-full mt-4"
               type="button"
               onClick={() => googleAuth()}
             >
               Continue with Google
-              <GoogleIcon color="currentColor" />
+              <GoogleIcon color="currentColor" className="ml-2" />
             </button>
           </form>
         </div>

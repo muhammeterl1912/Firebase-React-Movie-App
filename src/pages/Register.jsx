@@ -11,9 +11,13 @@ const Register = () => {
     password: "",
   });
 
-  const { createUser,googleAuth  } = useContextAuth();
-  const navigate = useNavigate();
+  const { createUser, googleAuth, currentUser } = useContextAuth();
 
+  const navigate = useNavigate();
+  if (currentUser) {
+    navigate("/");
+    return null;
+  }
   const handleChange = (e) => {
     setUserInfo((info) => ({
       ...info,
@@ -22,8 +26,8 @@ const Register = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const displayName = `${userInfo.firstName} ${userInfo.lastName}`
-    createUser(userInfo.email, userInfo.password,displayName);
+    const displayName = `${userInfo.firstName} ${userInfo.lastName}`;
+    createUser(userInfo.email, userInfo.password, displayName);
     navigate("/login");
   };
   return (
@@ -84,7 +88,7 @@ const Register = () => {
             <button
               className="flex justify-between text-center items-center btn-danger"
               type="button"
-              onClick={()=>googleAuth()}
+              onClick={() => googleAuth()}
             >
               Continue with Google
               <GoogleIcon color="currentColor" />
