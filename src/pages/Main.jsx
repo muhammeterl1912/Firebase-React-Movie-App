@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { useMovieData } from "../context/MovieProvider";
 import LoadingText from "../components/Loading";
 import MovieCard from "../components/MovieCard";
@@ -9,7 +10,7 @@ const Main = () => {
   return (
     <div>
       <SearchInput />
-      <div className="flex justify-center flex-wrap">
+      <div className="flex justify-center flex-wrap mb-10">
         {loading ? (
           <LoadingText />
         ) : (
@@ -23,4 +24,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default memo(Main);
